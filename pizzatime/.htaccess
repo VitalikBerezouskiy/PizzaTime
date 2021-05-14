@@ -1,0 +1,39 @@
+
+# BEGIN WordPress
+# Строки между `BEGIN WordPress` и `END WordPress` были созданы автоматически.
+# Они могут быть изменены только фильтрами WordPress.
+# Все изменения между этими отметками будут перезаписаны.
+
+
+# BEGIN WebP Converter
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+</IfModule>
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_ACCEPT} image/webp
+  RewriteCond %{DOCUMENT_ROOT}/pizzatime/wp-content/uploads-webpc/$1.jpg.webp -f
+  RewriteRule wp-content/uploads/(.+)\.jpg$ wp-content/uploads-webpc/$1.jpg.webp [T=image/webp]
+  RewriteCond %{HTTP_ACCEPT} image/webp
+  RewriteCond %{DOCUMENT_ROOT}/pizzatime/wp-content/uploads-webpc/$1.jpeg.webp -f
+  RewriteRule wp-content/uploads/(.+)\.jpeg$ wp-content/uploads-webpc/$1.jpeg.webp [T=image/webp]
+  RewriteCond %{HTTP_ACCEPT} image/webp
+  RewriteCond %{DOCUMENT_ROOT}/pizzatime/wp-content/uploads-webpc/$1.png.webp -f
+  RewriteRule wp-content/uploads/(.+)\.png$ wp-content/uploads-webpc/$1.png.webp [T=image/webp]
+</IfModule>
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+</IfModule>
+# END WebP Converter
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /pizzatime/
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /pizzatime/index.php [L]
+</IfModule>
+
+# END WordPress
